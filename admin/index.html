@@ -1,0 +1,1095 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Painel — A Festa dos 50</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232A2724'/%3E%3Ctext x='32' y='42' font-size='26' text-anchor='middle' font-family='Arial' font-weight='900' fill='%23F6C445'%3E50%3C/text%3E%3C/svg%3E">
+<style>
+@font-face{font-family:"Bricolage Grotesque"; src:url(../fonts/bricolage-grotesque.woff2) format("woff2"); font-weight:200 800; font-display:swap}
+@font-face{font-family:"DM Sans"; src:url(../fonts/dm-sans-400.woff2) format("woff2"); font-weight:400; font-display:swap}
+@font-face{font-family:"DM Sans"; src:url(../fonts/dm-sans-500.woff2) format("woff2"); font-weight:500; font-display:swap}
+@font-face{font-family:"DM Sans"; src:url(../fonts/dm-sans-700.woff2) format("woff2"); font-weight:600 800; font-display:swap}
+@font-face{font-family:"Caveat"; src:url(../fonts/caveat-700.woff2) format("woff2"); font-weight:700; font-display:swap}
+:root{
+  --bg:#FBF8F3; --panel:#FFFFFF; --cream:#F6EFE3; --line:#E8E1D6; --line-2:#D9D0C2; --ink:#2A2724; --ink-2:#6A635A; --ink-3:#958C80;
+  --olive:#6E6E3A; --olive-bg:#EEF0DF; --terra:#C8553D; --terra-bg:#FBE9E3; --gold:#F6C445; --gold-bg:#FDF4D6; --blue:#2E5487; --blue-bg:#E6EDF6; --red:#B42318; --red-bg:#FDECEA;
+  --r:14px; --sh:0 1px 2px rgba(42,39,36,.06), 0 8px 24px -12px rgba(42,39,36,.18);
+  --f:"DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif; --fd:"Bricolage Grotesque", var(--f);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--ink); font:400 15px/1.5 var(--f)}
+button,input,select,textarea{font:inherit; color:inherit}
+button{cursor:pointer}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid #8FB0DA; outline-offset:2px}
+.sr-only{position:absolute!important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+h1,h2,h3{font-family:var(--fd); letter-spacing:-.015em; margin:0}
+.muted{color:var(--ink-2)} .small{font-size:13px}
+
+/* botões */
+.b{display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:42px; padding:9px 16px; border-radius:11px; border:1px solid var(--line-2); background:var(--panel); font-weight:600; font-size:14px; white-space:nowrap; transition:background .15s, border-color .15s, transform .1s}
+a.b{text-decoration:none; color:var(--ink)} a.b.b-primary,a.b.b-terra{color:#fff}
+.b:hover{background:var(--cream)} .b:active{transform:translateY(1px)}
+.b[disabled]{opacity:.55; pointer-events:none}
+.b-primary{background:var(--ink); border-color:var(--ink); color:#fff} .b-primary:hover{background:#000}
+.b-terra{background:var(--terra); border-color:var(--terra); color:#fff} .b-terra:hover{background:#B04730}
+.b-olive{background:var(--olive); border-color:var(--olive); color:#fff} .b-olive:hover{background:#5B5B2F}
+.b-danger{color:var(--red); border-color:#F0C7C2} .b-danger:hover{background:var(--red-bg)}
+.b-ghost{border-color:transparent; background:transparent} .b-ghost:hover{background:var(--cream)}
+.b-sm{min-height:34px; padding:6px 11px; font-size:13px; border-radius:9px}
+.b-icon{min-width:38px; padding:0}
+.spin{width:16px; height:16px; border-radius:50%; border:2px solid currentColor; border-right-color:transparent; animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* formulários */
+.f{display:grid; gap:6px; margin-bottom:16px}
+.f > label,.f > .lab{font-weight:600; font-size:13px}
+.f .hint{font-size:12.5px; color:var(--ink-2)}
+.in,.ta,.sel{width:100%; min-height:44px; padding:10px 12px; border-radius:10px; border:1px solid var(--line-2); background:#fff; font-size:15px}
+.ta{min-height:84px; resize:vertical; line-height:1.45}
+.in:focus,.ta:focus,.sel:focus{outline:none; border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-bg)}
+.in.invalid{border-color:var(--red); box-shadow:0 0 0 3px var(--red-bg)}
+.grid2{display:grid; gap:0 16px; grid-template-columns:1fr}
+@media (min-width:700px){ .grid2{grid-template-columns:1fr 1fr} .grid3{display:grid; gap:0 16px; grid-template-columns:repeat(3,1fr)} }
+.switch{display:flex; align-items:center; gap:10px; min-height:40px; font-weight:600; font-size:14px; cursor:pointer}
+.switch input{appearance:none; width:42px; height:24px; border-radius:12px; background:var(--line-2); position:relative; transition:background .2s; cursor:pointer; flex:none}
+.switch input::after{content:""; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:#fff; transition:transform .2s; box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.switch input:checked{background:var(--olive)} .switch input:checked::after{transform:translateX(18px)}
+
+/* chips de estado */
+.chip{display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:999px; font-size:12px; font-weight:700; letter-spacing:.02em; white-space:nowrap}
+.chip::before{content:""; width:7px; height:7px; border-radius:50%; background:currentColor}
+.c-draft{background:#EFEDE9; color:#5F5850} .c-scheduled{background:var(--blue-bg); color:var(--blue)} .c-published{background:var(--olive-bg); color:#4E5020} .c-archived{background:#F3F1EE; color:var(--ink-3)}
+.c-hidden{background:#EFEDE9; color:#5F5850} .c-revealed{background:var(--terra-bg); color:#9E3B26} .c-warn{background:var(--gold-bg); color:#7A5A00}
+
+/* login */
+.login{min-height:100svh; display:grid; place-items:center; padding:24px; background:radial-gradient(90% 60% at 50% 0%, #FDF1DB 0%, var(--bg) 60%)}
+.login-card{width:min(100%, 400px); background:var(--panel); border:1px solid var(--line); border-radius:22px; box-shadow:var(--sh); padding:30px 26px}
+.brand{display:flex; align-items:center; gap:12px; margin-bottom:22px}
+.brand .logo{width:46px; height:46px; border-radius:13px; background:var(--ink); color:var(--gold); display:grid; place-items:center; font:800 18px var(--fd)}
+.brand b{display:block; font:800 19px/1.1 var(--fd)} .brand small{color:var(--ink-2); font-size:13px}
+.pw{position:relative} .pw .in{padding-right:92px}
+.pw button{position:absolute; right:6px; top:50%; transform:translateY(-50%); min-height:34px; padding:4px 10px; border:0; background:var(--cream); border-radius:8px; font-size:13px; font-weight:600}
+.alert{padding:11px 13px; border-radius:10px; font-size:14px; margin:0 0 14px}
+.alert-err{background:var(--red-bg); color:var(--red)} .alert-ok{background:var(--olive-bg); color:#4E5020} .alert-info{background:var(--blue-bg); color:var(--blue)} .alert-warn{background:var(--gold-bg); color:#6B4E00}
+
+/* app */
+.app{display:grid; min-height:100svh; grid-template-columns:minmax(0,1fr)}
+.app > div{min-width:0}
+.side{display:none}
+.top{position:sticky; top:0; z-index:20; background:rgba(251,248,243,.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.top-in{display:flex; align-items:center; gap:10px; padding:10px 14px}
+.top .brand{margin:0} .top .brand .logo{width:36px; height:36px; font-size:14px; border-radius:10px} .top .brand b{font-size:15px}
+.top .sp{flex:1}
+.navm{display:flex; gap:6px; overflow-x:auto; padding:0 12px 10px; scrollbar-width:none}
+.navm::-webkit-scrollbar{display:none}
+.navm a{flex:none; padding:8px 12px; border-radius:999px; text-decoration:none; color:var(--ink-2); font-weight:600; font-size:13.5px; border:1px solid var(--line); background:#fff}
+.navm a.on{background:var(--ink); color:#fff; border-color:var(--ink)}
+.content{padding:18px 14px calc(110px + var(--safe-b)); width:100%; max-width:980px; margin:0 auto}
+@media (min-width:980px){
+  .app{grid-template-columns:260px minmax(0,1fr)}
+  .side{display:flex; flex-direction:column; position:sticky; top:0; height:100svh; padding:22px 16px; border-right:1px solid var(--line); background:#FFFDF9}
+  .side nav{display:grid; gap:2px; margin-top:8px}
+  .side nav a{display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; text-decoration:none; color:var(--ink-2); font-weight:600}
+  .side nav a:hover{background:var(--cream)} .side nav a.on{background:var(--ink); color:#fff}
+  .side nav a svg{width:18px; height:18px; flex:none}
+  .side .who{margin-top:auto; padding-top:14px; border-top:1px solid var(--line); font-size:13px; color:var(--ink-2); word-break:break-all}
+  .navm,.top .brand{display:none}
+  .content{padding:28px 34px 120px}
+}
+.page-h{display:flex; flex-wrap:wrap; align-items:end; justify-content:space-between; gap:12px; margin:4px 0 20px}
+.page-h h1{font-size:clamp(24px, 4vw, 32px); line-height:1.1}
+.page-h p{margin:4px 0 0; color:var(--ink-2)}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--sh); padding:18px}
+.card + .card{margin-top:16px}
+.card h2{font-size:18px; margin-bottom:12px}
+.card h3{font-size:15px; margin:18px 0 10px}
+.stats{display:grid; gap:12px; grid-template-columns:repeat(auto-fill, minmax(min(100%, 210px), 1fr))}
+.stat{padding:16px; border-radius:var(--r); background:var(--panel); border:1px solid var(--line); box-shadow:var(--sh); display:grid; gap:4px; align-content:start; text-decoration:none; color:inherit}
+.stat .k{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
+.stat .v{font:800 22px/1.15 var(--fd)}
+.stat .s{font-size:13px; color:var(--ink-2)}
+a.stat:hover{border-color:var(--line-2)}
+
+/* barra de publicação */
+.pubbar{position:fixed; z-index:30; left:12px; right:12px; bottom:calc(12px + var(--safe-b)); display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding:10px 12px 10px 16px; border-radius:16px; background:var(--ink); color:#fff; box-shadow:0 20px 40px -12px rgba(0,0,0,.45)}
+.pubbar .msg{flex:1 1 180px; font-size:14px}
+.pubbar .msg b{color:var(--gold)}
+.pubbar .b{border-color:rgba(255,255,255,.2); background:rgba(255,255,255,.08); color:#fff}
+.pubbar .b-gold{background:var(--gold); color:var(--ink); border-color:var(--gold)}
+@media (min-width:980px){ .pubbar{left:calc(260px + 34px); right:34px; max-width:912px; margin:0 auto} }
+
+/* lista de pistas */
+.clist{display:grid; gap:10px}
+.crow{display:grid; grid-template-columns:auto 1fr; gap:10px 12px; align-items:start; padding:14px; border-radius:var(--r); background:var(--panel); border:1px solid var(--line); box-shadow:var(--sh)}
+.crow.dragging{opacity:.5} .crow.over{outline:2px dashed var(--blue); outline-offset:2px}
+.crow .ord{display:grid; gap:4px; justify-items:center}
+.crow .ord span{font:800 16px var(--fd); color:var(--ink-3)}
+.crow .grip{cursor:grab; color:var(--ink-3); display:none}
+@media (pointer:fine){ .crow .grip{display:block} }
+.crow h3{font-size:16px; margin:0}
+.crow .meta{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:6px 0 4px; font-size:13px; color:var(--ink-2)}
+.crow .pv{font-size:14px; color:var(--ink-2); margin:4px 0 0; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+.crow .acts{grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:6px; padding-top:8px; border-top:1px solid var(--line)}
+
+/* localização */
+.locstate{display:flex; align-items:center; gap:14px; padding:18px; border-radius:var(--r); margin-bottom:16px}
+.locstate .big{font:800 clamp(20px, 4vw, 26px)/1.1 var(--fd); letter-spacing:.02em}
+.locstate.hidden{background:#F0EDE8} .locstate.scheduled{background:var(--blue-bg); color:var(--blue)} .locstate.revealed{background:var(--terra-bg); color:#8E3422}
+.locstate .dot{width:14px; height:14px; border-radius:50%; background:currentColor; flex:none}
+.actions{display:flex; flex-wrap:wrap; gap:8px}
+
+/* conteúdo */
+details.sec{border:1px solid var(--line); border-radius:var(--r); background:var(--panel); box-shadow:var(--sh)}
+details.sec + details.sec{margin-top:10px}
+details.sec > summary{list-style:none; cursor:pointer; padding:14px 16px; font:700 15px var(--f); display:flex; align-items:center; justify-content:space-between; gap:10px}
+details.sec > summary::-webkit-details-marker{display:none}
+details.sec > summary::after{content:"+"; font:600 20px var(--f); color:var(--ink-3)}
+details.sec[open] > summary::after{content:"–"}
+details.sec .body{padding:4px 16px 16px; border-top:1px solid var(--line)}
+.lst{display:grid; gap:8px; margin-bottom:10px}
+.lst .it{display:grid; grid-template-columns:1fr auto; gap:8px; align-items:start; padding:10px; border:1px solid var(--line); border-radius:10px; background:#FFFDF9}
+.lst .it .ctl{display:flex; gap:4px}
+.lst .it .fields{display:grid; gap:8px}
+
+/* sugestões */
+.sug{display:grid; gap:8px; padding:14px; border-radius:var(--r); background:var(--panel); border:1px solid var(--line); box-shadow:var(--sh)}
+.sug + .sug{margin-top:10px}
+.sug .nm{font:800 18px var(--fd)}
+
+/* diálogos */
+dialog{border:0; border-radius:20px; padding:0; width:min(94vw, 560px); max-height:90svh; box-shadow:0 30px 80px -20px rgba(0,0,0,.5); color:var(--ink)}
+dialog::backdrop{background:rgba(30,26,22,.45); backdrop-filter:blur(2px)}
+.dlg{padding:22px; display:grid; gap:12px}
+.dlg h2{font-size:20px}
+.dlg .row{display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px; margin-top:6px}
+dialog.wide{width:min(96vw, 760px)}
+.phone{width:min(100%, 390px); height:min(74svh, 780px); margin:0 auto; border-radius:34px; border:10px solid #1D1B19; overflow:hidden; background:#000; box-shadow:0 20px 40px -20px rgba(0,0,0,.6)}
+.phone iframe{width:100%; height:100%; border:0; background:#F6EBD6}
+.prev-label{display:inline-block; padding:4px 10px; border-radius:6px; background:var(--red); color:#fff; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase}
+
+/* toasts */
+.toasts{position:fixed; z-index:200; top:12px; left:50%; transform:translateX(-50%); display:grid; gap:8px; width:min(94vw, 420px)}
+.toast{padding:12px 14px; border-radius:12px; background:var(--ink); color:#fff; font-size:14px; box-shadow:0 12px 30px -10px rgba(0,0,0,.5); animation:tin .3s ease}
+.toast.err{background:var(--red)} .toast.ok{background:#3F4A1E}
+@keyframes tin{from{opacity:0; transform:translateY(-8px)}}
+table.audit{width:100%; border-collapse:collapse; font-size:13px}
+table.audit td{padding:8px 6px; border-bottom:1px solid var(--line); vertical-align:top}
+.boot{min-height:100svh; display:grid; place-items:center; color:var(--ink-2)}
+</style>
+</head>
+<body>
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<div class="boot" id="boot"><span class="spin" aria-hidden="true"></span><span class="sr-only">A carregar…</span></div>
+
+<!-- ===================== LOGIN ===================== -->
+<main class="login" id="login" hidden>
+  <form class="login-card" id="login-form" novalidate>
+    <div class="brand"><span class="logo">50</span><span><b>A Festa dos 50</b><small>Painel de controlo privado</small></span></div>
+    <div id="login-alert"></div>
+    <div class="f"><label for="l-email">Email do administrador</label><input class="in" id="l-email" type="email" autocomplete="username" required></div>
+    <div class="f"><label for="l-pass">Password</label>
+      <div class="pw"><input class="in" id="l-pass" type="password" autocomplete="current-password" required>
+        <button type="button" id="l-toggle" aria-controls="l-pass" aria-pressed="false">Mostrar</button></div>
+    </div>
+    <button class="b b-primary" id="l-submit" type="submit" style="width:100%">Entrar</button>
+    <p style="margin:14px 0 0;text-align:center"><button type="button" class="b b-ghost b-sm" id="l-forgot">Esqueci-me da password</button></p>
+  </form>
+  <form class="login-card" id="recover-form" hidden novalidate>
+    <div class="brand"><span class="logo">50</span><span><b>Nova password</b><small>Escolhe uma password nova</small></span></div>
+    <div id="recover-alert"></div>
+    <div class="f"><label for="r-pass">Nova password</label><input class="in" id="r-pass" type="password" autocomplete="new-password" minlength="10" required><span class="hint">Mínimo 10 caracteres.</span></div>
+    <div class="f"><label for="r-pass2">Repetir</label><input class="in" id="r-pass2" type="password" autocomplete="new-password" required></div>
+    <button class="b b-primary" type="submit" style="width:100%">Guardar password</button>
+  </form>
+  <div class="login-card" id="noconfig" hidden>
+    <div class="brand"><span class="logo">50</span><span><b>Falta ligar a base de dados</b><small>config.js está vazio</small></span></div>
+    <p>Preenche <code>supabaseUrl</code> e <code>supabaseAnonKey</code> no ficheiro <code>config.js</code> (na raiz do site) e volta a publicar. Instruções no README.</p>
+  </div>
+</main>
+
+<!-- ===================== APP ===================== -->
+<div class="app" id="app" hidden>
+  <aside class="side" aria-label="Menu">
+    <div class="brand"><span class="logo">50</span><span><b>A Festa dos 50</b><small>Painel de controlo</small></span></div>
+    <nav id="nav-side"></nav>
+    <div class="who"><span id="who"></span><br><button class="b b-sm" id="logout-side" style="margin-top:10px">Terminar sessão</button></div>
+  </aside>
+  <div>
+    <header class="top">
+      <div class="top-in">
+        <div class="brand"><span class="logo">50</span><span><b>Painel</b></span></div>
+        <span class="sp"></span>
+        <a class="b b-sm" href="../" target="_blank" rel="noopener">Ver site</a>
+        <button class="b b-sm" id="logout-top">Sair</button>
+      </div>
+      <nav class="navm" id="nav-m" aria-label="Secções"></nav>
+    </header>
+    <main class="content" id="view" tabindex="-1"></main>
+  </div>
+</div>
+
+<div class="pubbar" id="pubbar" hidden>
+  <span class="msg" id="pub-msg"></span>
+  <button class="b b-sm" id="pub-preview">Pré-visualizar</button>
+  <button class="b b-sm" id="pub-discard">Descartar</button>
+  <button class="b b-sm b-gold" id="pub-go">Publicar</button>
+</div>
+
+<dialog id="dlg"><div class="dlg" id="dlg-body"></div></dialog>
+
+<script src="vendor/supabase-2.118.0.js"></script>
+<script src="../shared/defaults.js"></script>
+<script src="../config.js"></script>
+<script>
+(function () {
+  "use strict";
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  function el(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    if (attrs) for (var k in attrs) {
+      var v = attrs[k];
+      if (v === null || v === undefined || v === false) continue;
+      if (k === "text") n.textContent = v;
+      else if (k === "class") n.className = v;
+      else if (k.slice(0, 2) === "on") n.addEventListener(k.slice(2), v);
+      else if (k === "value") n.value = v;
+      else if (k === "checked") n.checked = !!v;
+      else n.setAttribute(k, v === true ? "" : v);
+    }
+    (kids || []).forEach(function (c) { if (c != null && c !== false) n.appendChild(typeof c === "string" ? document.createTextNode(c) : c); });
+    return n;
+  }
+  var CFG = window.FESTA_CONFIG || {}, DEF = window.FESTA_DEFAULTS;
+  var TZ = "Europe/Lisbon";
+  var MAPS_RE = /^https:\/\/((www\.)?google\.(com|pt)\/maps([\/?].*)?|maps\.google\.(com|pt)\/.*|maps\.app\.goo\.gl\/[A-Za-z0-9_-]+.*|goo\.gl\/maps\/[A-Za-z0-9_-]+.*)$/i;
+  function validMaps(u) { return typeof u === "string" && u.length <= 2048 && !/[\s"'<>\\]/.test(u) && MAPS_RE.test(u); }
+
+  function toast(msg, kind) { var t = el("div", { class: "toast " + (kind || ""), text: msg }); $("#toasts").appendChild(t); setTimeout(function () { t.remove(); }, kind === "err" ? 7000 : 3500); }
+  function fmt(iso, withYear) {
+    if (!iso) return "—";
+    return new Intl.DateTimeFormat("pt-PT", { timeZone: TZ, day: "numeric", month: "short", year: withYear === false ? undefined : "numeric", hour: "2-digit", minute: "2-digit" }).format(new Date(iso));
+  }
+  function toLisbonInput(iso) {
+    if (!iso) return "";
+    var o = {}; new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date(iso)).forEach(function (p) { o[p.type] = p.value; });
+    return o.year + "-" + o.month + "-" + o.day + "T" + o.hour + ":" + o.minute;
+  }
+  function busy(btn, on, label) {
+    if (!btn) return;
+    if (on) { btn.dataset.label = btn.innerHTML; btn.disabled = true; btn.textContent = ""; btn.appendChild(el("span", { class: "spin", "aria-hidden": "true" })); btn.appendChild(document.createTextNode(" " + (label || "A guardar…"))); }
+    else { btn.disabled = false; if (btn.dataset.label != null) btn.innerHTML = btn.dataset.label; }
+  }
+  function download(name, text, type) {
+    var url = URL.createObjectURL(new Blob([text], { type: type })), a = el("a", { href: url, download: name });
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(url); }, 3000);
+  }
+
+  /* ---------------- diálogos ---------------- */
+  var dlg = $("#dlg");
+  function openDialog(build, wide) {
+    return new Promise(function (resolve) {
+      var body = $("#dlg-body"); body.textContent = ""; dlg.classList.toggle("wide", !!wide);
+      var done = function (v) { dlg.close(); resolve(v); };
+      build(body, done);
+      dlg.onclose = function () { resolve(undefined); };
+      dlg.showModal();
+    });
+  }
+  function confirmBox(title, text, okLabel, danger) {
+    return openDialog(function (b, done) {
+      b.appendChild(el("h2", { text: title }));
+      if (text) b.appendChild(el("p", { class: "muted", style: "margin:0", text: text }));
+      b.appendChild(el("div", { class: "row" }, [
+        el("button", { class: "b", text: "Cancelar", onclick: function () { done(false); } }),
+        el("button", { class: "b " + (danger ? "b-terra" : "b-primary"), text: okLabel || "Confirmar", onclick: function () { done(true); } })
+      ]));
+    }).then(function (v) { return !!v; });
+  }
+  function previewPhone(url, title) {
+    return openDialog(function (b, done) {
+      b.appendChild(el("div", { style: "display:flex;justify-content:space-between;align-items:center;gap:10px" }, [el("h2", { text: title || "Pré-visualização" }), el("span", { class: "prev-label", text: "Não publicado" })]));
+      b.appendChild(el("p", { class: "muted small", style: "margin:0", text: "Mostra os rascunhos guardados e todas as pistas não arquivadas. Os convidados não veem isto." }));
+      b.appendChild(el("div", { class: "phone" }, [el("iframe", { src: url, title: "Pré-visualização do site num telemóvel" })]));
+      b.appendChild(el("div", { class: "row" }, [el("a", { class: "b", href: url, target: "_blank", rel: "noopener", text: "Abrir noutro separador" }), el("button", { class: "b b-primary", text: "Fechar", onclick: function () { done(); } })]));
+    }, true);
+  }
+
+  /* ---------------- Supabase ---------------- */
+  if (!CFG.supabaseUrl || !CFG.supabaseAnonKey || !window.supabase) {
+    $("#boot").hidden = true; $("#login").hidden = false; $("#login-form").hidden = true; $("#noconfig").hidden = false;
+    return;
+  }
+  var sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey, {
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: "festa50-admin", flowType: "implicit" }
+  });
+  function rpc(fn, args) {
+    return sb.rpc(fn, args || {}).then(function (r) {
+      if (r.error) {
+        var e = new Error(r.error.message || "Erro desconhecido"); e.code = r.error.code; e.status = r.status;
+        if (r.status === 401 || /JWT|token/i.test(e.message)) { toast("A sessão expirou. Entra outra vez.", "err"); showLogin(); }
+        throw e;
+      }
+      return r.data;
+    });
+  }
+
+  /* ---------------- LOGIN ---------------- */
+  var fails = +(sessionStorage.getItem("f50fails") || 0), lockUntil = +(sessionStorage.getItem("f50lock") || 0);
+  try { $("#l-email").value = localStorage.getItem("festa50-admin-email") || ""; } catch (e) {}
+  $("#l-toggle").addEventListener("click", function () {
+    var i = $("#l-pass"), show = i.type === "password"; i.type = show ? "text" : "password";
+    this.textContent = show ? "Esconder" : "Mostrar"; this.setAttribute("aria-pressed", String(show));
+  });
+  function loginAlert(msg, kind) { var a = $("#login-alert"); a.textContent = ""; if (msg) a.appendChild(el("p", { class: "alert alert-" + (kind || "err"), role: "alert", text: msg })); }
+  $("#login-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = $("#l-email").value.trim(), pass = $("#l-pass").value, btn = $("#l-submit");
+    if (Date.now() < lockUntil) { loginAlert("Demasiadas tentativas. Espera " + Math.ceil((lockUntil - Date.now()) / 1000) + " segundos."); return; }
+    if (!email || !pass) { loginAlert("Preenche o email e a password."); return; }
+    busy(btn, true, "A entrar…"); loginAlert("");
+    sb.auth.signInWithPassword({ email: email, password: pass }).then(function (r) {
+      busy(btn, false);
+      if (r.error) {
+        fails++; sessionStorage.setItem("f50fails", fails);
+        if (fails >= 5) { lockUntil = Date.now() + Math.min(300, 30 * Math.pow(2, fails - 5)) * 1000; sessionStorage.setItem("f50lock", lockUntil); }
+        var m = /rate|too many|429/i.test(r.error.message + r.error.status) ? "Demasiadas tentativas. O servidor bloqueou por uns minutos." : "Email ou password incorretos.";
+        loginAlert(m); $("#l-pass").select(); return;
+      }
+      fails = 0; sessionStorage.removeItem("f50fails"); sessionStorage.removeItem("f50lock");
+      try { localStorage.setItem("festa50-admin-email", email); } catch (x) {}
+      $("#l-pass").value = "";
+      afterLogin();
+    });
+  });
+  $("#l-forgot").addEventListener("click", function () {
+    var email = $("#l-email").value.trim();
+    if (!email) { loginAlert("Escreve primeiro o teu email."); $("#l-email").focus(); return; }
+    sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + location.pathname }).then(function (r) {
+      if (r.error) loginAlert("Não foi possível enviar o email: " + r.error.message);
+      else loginAlert("Se este email for de um administrador, vais receber um link para escolher uma nova password.", "ok");
+    });
+  });
+  $("#recover-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var p1 = $("#r-pass").value, p2 = $("#r-pass2").value, a = $("#recover-alert");
+    a.textContent = "";
+    if (p1.length < 10) { a.appendChild(el("p", { class: "alert alert-err", text: "A password tem de ter pelo menos 10 caracteres." })); return; }
+    if (p1 !== p2) { a.appendChild(el("p", { class: "alert alert-err", text: "As passwords não coincidem." })); return; }
+    sb.auth.updateUser({ password: p1 }).then(function (r) {
+      if (r.error) { a.appendChild(el("p", { class: "alert alert-err", text: r.error.message })); return; }
+      toast("Password atualizada.", "ok"); history.replaceState(null, "", location.pathname); afterLogin();
+    });
+  });
+
+  function showLogin(recovery) {
+    $("#boot").hidden = true; $("#app").hidden = true; $("#pubbar").hidden = true; $("#login").hidden = false;
+    $("#login-form").hidden = !!recovery; $("#recover-form").hidden = !recovery;
+    if (!recovery) setTimeout(function () { ($("#l-email").value ? $("#l-pass") : $("#l-email")).focus(); }, 30);
+  }
+  function logout() {
+    guardLeave().then(function (ok) {
+      if (!ok) return;
+      sb.auth.signOut().finally(function () { dirty = false; showLogin(); toast("Sessão terminada."); });
+    });
+  }
+  $("#logout-top").addEventListener("click", logout); $("#logout-side").addEventListener("click", logout);
+
+  var recovering = /type=recovery/.test(location.hash);
+  sb.auth.onAuthStateChange(function (ev) { if (ev === "PASSWORD_RECOVERY") { recovering = true; showLogin(true); } });
+
+  function afterLogin() {
+    return rpc("admin_whoami").then(function (w) {
+      if (!w || !w.is_admin) {
+        return sb.auth.signOut().then(function () { showLogin(); loginAlert("Esta conta não tem acesso de administrador."); });
+      }
+      $("#who").textContent = w.email || "";
+      $("#login").hidden = true; $("#boot").hidden = true; $("#app").hidden = false;
+      return refresh().then(route);
+    }).catch(function (e) { showLogin(); loginAlert("Não foi possível validar a sessão: " + e.message); });
+  }
+  sb.auth.getSession().then(function (r) {
+    if (recovering && r.data.session) { showLogin(true); return; }
+    if (r.data.session) afterLogin(); else showLogin();
+  });
+
+  /* ---------------- ESTADO ---------------- */
+  var ST = null, dirty = false;
+  function refresh() { return rpc("admin_get_state").then(function (s) { ST = s; updatePubbar(); return s; }); }
+  window.addEventListener("beforeunload", function (e) { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
+  function guardLeave() { return dirty ? confirmBox("Há alterações por guardar", "Se saíres agora, perdes o que mudaste nesta página.", "Sair sem guardar", true).then(function (ok) { if (ok) dirty = false; return ok; }) : Promise.resolve(true); }
+  function markDirty() { dirty = true; }
+
+  function updatePubbar() {
+    var bar = $("#pubbar"), d = ST && ST.documents;
+    if (!d) { bar.hidden = true; return; }
+    var pend = ["event", "content"].filter(function (k) { return d[k] && d[k].has_unpublished; });
+    bar.hidden = !pend.length;
+    var names = { event: "detalhes do evento", content: "textos do site" };
+    $("#pub-msg").textContent = "";
+    $("#pub-msg").appendChild(el("b", { text: "Rascunho por publicar: " })); $("#pub-msg").appendChild(document.createTextNode(pend.map(function (k) { return names[k]; }).join(" e ") + ". Os convidados ainda veem a versão anterior."));
+  }
+  $("#pub-go").addEventListener("click", function () {
+    var btn = this;
+    confirmBox("Publicar alterações?", "Os detalhes do evento e os textos guardados em rascunho passam a ser vistos por todos os convidados.", "Publicar").then(function (ok) {
+      if (!ok) return; busy(btn, true, "A publicar…");
+      rpc("admin_publish_document", { p_key: "all" }).then(function () { toast("Publicado. Os convidados já veem a nova versão.", "ok"); return refresh(); }).then(route)
+        .catch(function (e) { toast("Não foi publicado: " + e.message, "err"); }).finally(function () { busy(btn, false); });
+    });
+  });
+  $("#pub-discard").addEventListener("click", function () {
+    confirmBox("Descartar rascunhos?", "Voltas à versão publicada dos detalhes do evento e dos textos. As pistas e a localização não são afetadas.", "Descartar", true).then(function (ok) {
+      if (!ok) return;
+      Promise.all(["event", "content"].map(function (k) { return rpc("admin_discard_draft", { p_key: k }); })).then(function () { dirty = false; toast("Rascunhos descartados."); return refresh(); }).then(route)
+        .catch(function (e) { toast(e.message, "err"); });
+    });
+  });
+  $("#pub-preview").addEventListener("click", function () { previewPhone("../?preview=1", "Pré-visualização do site"); });
+
+  /* ---------------- NAVEGAÇÃO ---------------- */
+  var ICON = {
+    visao: '<path d="M3 13h8V3H3zM13 21h8V11h-8zM3 21h8v-6H3zM13 3v6h8V3z"/>',
+    evento: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    pistas: '<circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/>',
+    local: '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+    conteudo: '<path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/>',
+    sugestoes: '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M18 8v6M15 11h6"/>',
+    definicoes: '<circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/>'
+  };
+  var PAGES = [
+    ["visao", "Visão Geral", pageOverview], ["evento", "Detalhes do Evento", pageEvent], ["pistas", "Gestão de Pistas", pageClues],
+    ["local", "Localização", pageLocation], ["conteudo", "Conteúdo do Website", pageContent], ["sugestoes", "Sugestões de Convidados", pageSuggestions],
+    ["definicoes", "Definições", pageSettings]
+  ];
+  function buildNav() {
+    var side = $("#nav-side"), m = $("#nav-m"); side.textContent = ""; m.textContent = "";
+    PAGES.forEach(function (p) {
+      if (p[0] === "sugestoes" && !suggestionsEnabled()) return;
+      var a = el("a", { href: "#/" + p[0], "data-p": p[0] }); a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICON[p[0]] + "</svg>";
+      a.appendChild(document.createTextNode(p[1])); side.appendChild(a);
+      m.appendChild(el("a", { href: "#/" + p[0], "data-p": p[0], text: p[1] }));
+    });
+  }
+  function suggestionsEnabled() {
+    var ev = ST && ST.documents && ST.documents.event;
+    var mode = ev && ((ev.published && ev.published.suggestions_mode) || (ev.draft && ev.draft.suggestions_mode));
+    return mode === "backend" || (ST && ST.suggestions && ST.suggestions.total > 0);
+  }
+  var current = null;
+  function route() {
+    if (!ST) return;
+    buildNav();
+    var id = (location.hash.match(/^#\/(\w+)/) || [])[1] || "visao";
+    var page = PAGES.filter(function (p) { return p[0] === id; })[0] || PAGES[0];
+    current = page[0];
+    $$("#nav-side a, #nav-m a").forEach(function (a) { var on = a.getAttribute("data-p") === current; a.classList.toggle("on", on); if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    var v = $("#view"); v.textContent = ""; dirty = false;
+    page[2](v);
+    document.title = page[1] + " — A Festa dos 50";
+  }
+  var lastHash = location.hash;
+  window.addEventListener("hashchange", function () {
+    if (/access_token|type=recovery/.test(location.hash)) return;
+    if (dirty) {
+      var target = location.hash; history.replaceState(null, "", lastHash);
+      guardLeave().then(function (ok) { if (ok) { location.hash = target; } });
+      return;
+    }
+    lastHash = location.hash; route(); $("#view").focus({ preventScroll: true }); scrollTo(0, 0);
+  });
+  function head(v, title, sub, right) {
+    v.appendChild(el("div", { class: "page-h" }, [el("div", null, [el("h1", { text: title }), sub ? el("p", { text: sub }) : null]), right || null]));
+  }
+
+  /* =================================================================
+     VISÃO GERAL
+     ================================================================= */
+  function locState() { var p = ST.location && ST.location.public; return p ? p.state : "hidden"; }
+  function locLabel(s) { return { hidden: "LOCALIZAÇÃO ESCONDIDA", scheduled: "LOCALIZAÇÃO AGENDADA", revealed: "LOCALIZAÇÃO REVELADA" }[s]; }
+  function pageOverview(v) {
+    head(v, "Painel de Controlo — A Festa dos 50", "Tudo o que os convidados veem, num só sítio.");
+    var ev = ST.documents.event.published || ST.documents.event.draft, cl = ST.clues;
+    var pub = cl.filter(function (c) { return c.effective_status === "published"; }).length;
+    var sch = cl.filter(function (c) { return c.effective_status === "scheduled"; }).length;
+    var drf = cl.filter(function (c) { return c.status === "draft"; }).length;
+    var d = new Date(ev.date + "T12:00:00Z");
+    var dateTxt = new Intl.DateTimeFormat("pt-PT", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(d);
+    var ls = locState(), L = ST.location, pending = ST.documents.event.has_unpublished || ST.documents.content.has_unpublished;
+    var s = el("div", { class: "stats" }, [
+      stat("Data", dateTxt.charAt(0).toUpperCase() + dateTxt.slice(1), ev.timezone, "#/evento"),
+      stat("Horário", ev.start_time.replace(":", "h") + " → " + ev.end_time.replace(":", "h"), (ev.end_date !== ev.date ? "Termina a " + ev.end_date.split("-").reverse().join("/") : ""), "#/evento"),
+      stat("Localização", locLabel(ls), ls === "scheduled" ? "Revela a " + fmt(L.reveal_at) : ls === "revealed" ? L.venue_name : "Só tu sabes onde é.", "#/local"),
+      stat("Pistas publicadas", String(pub), pub === 1 ? "visível para os convidados" : "visíveis para os convidados", "#/pistas"),
+      stat("Pistas por publicar", String(sch + drf), sch + " agendada(s) · " + drf + " rascunho(s)", "#/pistas"),
+      stat("Website", pending ? "Rascunho por publicar" : "Tudo publicado", "Última publicação: " + fmt(ST.documents.event.published_at), "#/conteudo")
+    ]);
+    if (suggestionsEnabled()) s.appendChild(stat("Sugestões", String(ST.suggestions.total), ST.suggestions.new + " por rever", "#/sugestoes"));
+    else s.appendChild(stat("Sugestões", "Por WhatsApp", "Chegam ao teu WhatsApp — não há contagem aqui.", "#/evento"));
+    s.appendChild(stat("Confirmações", "Por WhatsApp", "O botão abre o WhatsApp com a mensagem pronta. Não há registo automático nem contagem aqui.", null));
+    v.appendChild(s);
+
+    var c = el("div", { class: "card", style: "margin-top:18px" }, [el("h2", { text: "Atalhos" }), el("div", { class: "actions" }, [
+      el("a", { class: "b b-primary", href: "#/pistas", text: "+ Nova Pista" }),
+      el("a", { class: "b", href: "#/local", text: "Revelação da localização" }),
+      el("button", { class: "b", text: "Pré-visualizar o site", onclick: function () { previewPhone("../?preview=1", "Pré-visualização do site"); } }),
+      el("a", { class: "b", href: "../", target: "_blank", rel: "noopener", text: "Abrir o site público" })
+    ])]);
+    v.appendChild(c);
+    var nx = cl.filter(function (x) { return x.effective_status === "scheduled"; }).sort(function (a, b) { return a.publish_at < b.publish_at ? -1 : 1; });
+    if (nx.length || ls === "scheduled") {
+      var cc = el("div", { class: "card" }, [el("h2", { text: "Próximos momentos" })]);
+      var ul = el("ul", { style: "margin:0;padding-left:18px" });
+      nx.forEach(function (x) { ul.appendChild(el("li", { text: fmt(x.publish_at) + " — pista «" + x.title + "»" })); });
+      if (ls === "scheduled") ul.appendChild(el("li", { text: fmt(L.reveal_at) + " — revelação da localização" }));
+      cc.appendChild(ul); cc.appendChild(el("p", { class: "muted small", style: "margin:10px 0 0", text: "A publicação agendada é decidida pelo relógio do servidor, em hora de Lisboa. Não precisas de fazer nada à hora marcada." }));
+      v.appendChild(cc);
+    }
+  }
+  function stat(k, val, sub, href) {
+    return el(href ? "a" : "div", { class: "stat", href: href }, [el("span", { class: "k", text: k }), el("span", { class: "v", text: val }), sub ? el("span", { class: "s", text: sub }) : null]);
+  }
+
+  /* =================================================================
+     DETALHES DO EVENTO
+     ================================================================= */
+  var EV_FIELDS = [
+    ["Identidade", [["title", "Título do evento"], ["headline", "Título principal (herói)", "Ex.: 50 ANOS."], ["subtitle", "Subtítulo"], ["intro_message", "Mensagem da abertura", null, "ta"], ["final_message", "Mensagem final", null, "ta"], ["description", "Descrição (também vai para o calendário)", null, "ta"]]],
+    ["Data e hora", [["date", "Data do evento", null, "date"], ["start_time", "Hora de início", null, "time"], ["end_date", "Data de fim", "Se acaba depois da meia-noite, é o dia seguinte.", "date"], ["end_time", "Hora de fim", null, "time"], ["timezone", "Fuso horário", "Europe/Lisbon", "tz"], ["city", "Cidade"]]],
+    ["Capacidade", [["capacity", "Lotação máxima", null, "number"], ["capacity_description", "Descrição da lotação"], ["capacity_message", "Mensagem ao tocar na lotação"]]],
+    ["Contactos", [["whatsapp_number", "Número de WhatsApp", "Com indicativo, sem + nem espaços. Ex.: 351936266342", "tel"], ["rsvp_message", "Mensagem de confirmação (pré-preenchida)", "Podes usar {data} para a data do evento.", "ta"], ["rsvp_deadline_text", "Prazo de confirmação (opcional)", "Ex.: Confirma até 14 de novembro. Fica vazio para não mostrar."], ["suggestion_message", "Mensagem de sugestão por WhatsApp", "Usa {nome} para o nome sugerido.", "ta"], ["suggestions_mode", "Sugestões de convidados", null, "mode"]]]
+  ];
+  function pageEvent(v) {
+    var doc = ST.documents.event, d = JSON.parse(JSON.stringify(doc.draft));
+    head(v, "Detalhes do Evento", "Guardar cria um rascunho. Os convidados só veem depois de publicares.");
+    if (doc.has_unpublished) v.appendChild(el("p", { class: "alert alert-warn", text: "Tens alterações guardadas que ainda não foram publicadas." }));
+    var form = el("form", { novalidate: true });
+    EV_FIELDS.forEach(function (grp) {
+      var card = el("section", { class: "card" }, [el("h2", { text: grp[0] })]), g = el("div", { class: "grid2" });
+      grp[1].forEach(function (f) {
+        var key = f[0], type = f[3] || "text", id = "ev-" + key, input;
+        if (type === "ta") input = el("textarea", { class: "ta", id: id, value: d[key] || "" });
+        else if (type === "tz") input = el("select", { class: "sel", id: id }, ["Europe/Lisbon", "Atlantic/Azores", "Atlantic/Madeira", "Europe/London", "Europe/Madrid", "Europe/Paris"].map(function (z) { return el("option", { value: z, text: z, selected: d[key] === z }); }));
+        else if (type === "mode") input = el("select", { class: "sel", id: id }, [["backend", "Guardar aqui no painel (recomendado)"], ["whatsapp", "Abrir o WhatsApp com a sugestão"], ["off", "Desligadas (secção escondida)"]].map(function (o) { return el("option", { value: o[0], text: o[1], selected: d[key] === o[0] }); }));
+        else input = el("input", { class: "in", id: id, type: type === "tel" ? "text" : type, inputmode: type === "tel" ? "numeric" : null, value: d[key] == null ? "" : d[key], min: type === "number" ? "1" : null });
+        input.addEventListener("input", function () { d[key] = type === "number" ? +input.value : input.value; markDirty(); });
+        input.addEventListener("change", function () { d[key] = type === "number" ? +input.value : input.value; markDirty(); });
+        var wrap = el("div", { class: "f", style: type === "ta" ? "grid-column:1/-1" : null }, [el("label", { for: id, text: f[1] }), input, f[2] ? el("span", { class: "hint", text: f[2] }) : null]);
+        g.appendChild(wrap);
+      });
+      card.appendChild(g); form.appendChild(card);
+    });
+    var note = el("p", { class: "muted small", text: "A localização edita-se em «Localização» — fica fora daqui para não ser revelada por engano." });
+    var save = el("button", { class: "b b-primary", type: "submit", text: "Guardar alterações" });
+    var err = el("div", { role: "alert" });
+    form.appendChild(el("div", { class: "card" }, [err, note, el("div", { class: "actions" }, [save, el("button", { class: "b", type: "button", text: "Pré-visualizar", onclick: function () { saveThen(function () { previewPhone("../?preview=1#convite"); }); } })])]));
+    form.addEventListener("submit", function (e) { e.preventDefault(); saveThen(); });
+    function saveThen(next) {
+      err.textContent = "";
+      if (d.date && d.end_date && (d.end_date + "T" + d.end_time) <= (d.date + "T" + d.start_time)) { err.appendChild(el("p", { class: "alert alert-err", text: "O fim tem de ser depois do início. Se acaba depois da meia-noite, a data de fim é o dia seguinte." })); return; }
+      busy(save, true);
+      rpc("admin_save_document", { p_key: "event", p_draft: d }).then(function () { dirty = false; toast("Guardado como rascunho. Publica para os convidados verem.", "ok"); return refresh(); })
+        .then(function () { if (next) next(); else route(); })
+        .catch(function (e) { err.appendChild(el("p", { class: "alert alert-err", text: "Não foi guardado: " + e.message })); toast("Não foi guardado.", "err"); })
+        .finally(function () { busy(save, false); });
+    }
+    v.appendChild(form);
+  }
+
+  /* =================================================================
+     PISTAS
+     ================================================================= */
+  var STATUS_PT = { draft: "Rascunho", scheduled: "Agendada", published: "Publicada", archived: "Arquivada" };
+  var STYLES = [["envelope", "Envelope com lacre"], ["postal", "Postal de Lisboa"], ["polaroid", "Polaroid"], ["bilhete", "Bilhete rasgado"], ["fosforos", "Caixa de fósforos"], ["caderno", "Página de caderno"]];
+  function pageClues(v) {
+    head(v, "Gestão de Pistas", "Os convidados só veem pistas publicadas — ou agendadas, a partir da hora marcada.",
+      el("button", { class: "b b-primary", text: "+ Nova Pista", onclick: function () { editClue(null); } }));
+    var active = ST.clues.filter(function (c) { return c.status !== "archived"; }), arch = ST.clues.filter(function (c) { return c.status === "archived"; });
+    if (!ST.clues.length) v.appendChild(el("div", { class: "card" }, [el("p", { style: "margin:0", text: "Ainda não há pistas. Cria a primeira com «+ Nova Pista»." })]));
+    var list = el("div", { class: "clist", id: "clist" });
+    active.forEach(function (c, i) { list.appendChild(clueRow(c, i, active)); });
+    v.appendChild(list);
+    if (arch.length) {
+      v.appendChild(el("h2", { style: "font-size:17px;margin:26px 0 10px", text: "Arquivadas" }));
+      var la = el("div", { class: "clist" }); arch.forEach(function (c, i) { la.appendChild(clueRow(c, i, arch, true)); }); v.appendChild(la);
+    }
+    enableDrag(list, active);
+  }
+  function clueRow(c, i, arr, archived) {
+    var eff = c.effective_status;
+    var meta = el("div", { class: "meta" }, [el("span", { class: "chip c-" + eff, text: STATUS_PT[eff] + (c.status === "scheduled" && eff === "published" ? " (agendamento cumprido)" : "") })]);
+    if (c.status === "scheduled" && eff === "scheduled") meta.appendChild(el("span", { text: "Publica a " + fmt(c.publish_at) + " (Lisboa)" }));
+    if (eff === "published") meta.appendChild(el("span", { text: "Visível desde " + fmt(c.publish_at || c.published_at) }));
+    meta.appendChild(el("span", { text: "· " + (STYLES.filter(function (s) { return s[0] === c.style; })[0] || ["", c.style])[1] }));
+    var acts = el("div", { class: "acts" });
+    var A = function (label, fn, cls) { acts.appendChild(el("button", { class: "b b-sm " + (cls || ""), type: "button", text: label, onclick: fn })); };
+    A("Editar", function () { editClue(c); });
+    A("Pré-visualizar", function () { previewPhone("../?preview=1&clue=" + encodeURIComponent(c.id) + "#pistas", "Pista: " + c.title); });
+    if (eff !== "published") A("Publicar", function () { setStatus(c, "published"); }, "b-olive");
+    if (eff === "published") A("Despublicar", function () { setStatus(c, "draft"); });
+    A(c.status === "scheduled" ? "Reagendar" : "Agendar", function () { schedule(c); });
+    if (c.status === "scheduled" && eff === "scheduled") A("Cancelar agendamento", function () { setStatus(c, "draft"); });
+    A("Duplicar", function () { rpc("admin_duplicate_clue", { p_id: c.id }).then(function () { toast("Pista duplicada (em rascunho)."); return refresh(); }).then(route).catch(function (e) { toast(e.message, "err"); }); });
+    if (!archived) A("Arquivar", function () { setStatus(c, "archived"); });
+    else A("Repor como rascunho", function () { setStatus(c, "draft"); });
+    A("Apagar", function () {
+      confirmBox("Apagar a pista «" + c.internal_name + "»?", "Isto não se pode desfazer. Se só a queres tirar do site, usa «Arquivar».", "Apagar", true).then(function (ok) {
+        if (ok) rpc("admin_delete_clue", { p_id: c.id }).then(function () { toast("Pista apagada."); return refresh(); }).then(route).catch(function (e) { toast(e.message, "err"); });
+      });
+    }, "b-danger");
+    var ord = el("div", { class: "ord" });
+    if (!archived) {
+      ord.appendChild(el("button", { class: "b b-sm b-icon b-ghost", type: "button", "aria-label": "Subir", disabled: i === 0, text: "↑", onclick: function () { move(arr, i, -1); } }));
+      ord.appendChild(el("span", { text: String(i + 1) }));
+      ord.appendChild(el("button", { class: "b b-sm b-icon b-ghost", type: "button", "aria-label": "Descer", disabled: i === arr.length - 1, text: "↓", onclick: function () { move(arr, i, 1); } }));
+    }
+    var row = el("article", { class: "crow", "data-id": c.id, draggable: archived ? null : "true" }, [ord, el("div", null, [
+      el("h3", { text: c.title }), el("div", { class: "small muted", text: "Interno: " + c.internal_name }), meta, el("p", { class: "pv", text: c.content })
+    ]), acts]);
+    return row;
+  }
+  function move(arr, i, dir) {
+    var ids = arr.map(function (c) { return c.id; }), j = i + dir; if (j < 0 || j >= ids.length) return;
+    var t = ids[i]; ids[i] = ids[j]; ids[j] = t; saveOrder(ids);
+  }
+  function saveOrder(ids) {
+    var arch = ST.clues.filter(function (c) { return c.status === "archived"; }).map(function (c) { return c.id; });
+    rpc("admin_reorder_clues", { p_ids: ids.concat(arch) }).then(function () { toast("Ordem guardada."); return refresh(); }).then(route).catch(function (e) { toast(e.message, "err"); });
+  }
+  function enableDrag(list) {
+    var dragId = null;
+    list.addEventListener("dragstart", function (e) { var r = e.target.closest(".crow"); if (!r) return; dragId = r.dataset.id; r.classList.add("dragging"); e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", dragId); });
+    list.addEventListener("dragend", function () { $$(".crow", list).forEach(function (r) { r.classList.remove("dragging", "over"); }); });
+    list.addEventListener("dragover", function (e) { var r = e.target.closest(".crow"); if (!r || !dragId) return; e.preventDefault(); $$(".crow", list).forEach(function (x) { x.classList.toggle("over", x === r); }); });
+    list.addEventListener("drop", function (e) {
+      e.preventDefault(); var r = e.target.closest(".crow"); if (!r || !dragId || r.dataset.id === dragId) return;
+      var ids = $$(".crow", list).map(function (x) { return x.dataset.id; }), from = ids.indexOf(dragId), to = ids.indexOf(r.dataset.id);
+      ids.splice(to, 0, ids.splice(from, 1)[0]); dragId = null; saveOrder(ids);
+    });
+  }
+  function setStatus(c, status, localAt) {
+    var labels = { published: "publicada", draft: "passou a rascunho", archived: "arquivada", scheduled: "agendada" };
+    var go = function () {
+      return rpc("admin_set_clue_status", { p_id: c.id, p_status: status, p_publish_at_local: localAt || null })
+        .then(function () { toast("Pista " + labels[status] + ".", "ok"); return refresh(); }).then(route).catch(function (e) { toast(e.message, "err"); throw e; });
+    };
+    if (status === "published") return confirmBox("Publicar «" + c.title + "»?", "A pista fica visível para os convidados de imediato.", "Publicar").then(function (ok) { if (ok) return go(); });
+    return go();
+  }
+  function schedule(c) {
+    openDialog(function (b, done) {
+      var inp = el("input", { class: "in", type: "datetime-local", id: "sch-at", value: c.publish_at && c.status === "scheduled" ? toLisbonInput(c.publish_at) : toLisbonInput(new Date(Date.now() + 86400000).toISOString()).slice(0, 11) + "20:00" });
+      var err = el("div");
+      b.appendChild(el("h2", { text: "Agendar «" + c.title + "»" }));
+      b.appendChild(el("div", { class: "f" }, [el("label", { for: "sch-at", text: "Data e hora de publicação (hora de Lisboa)" }), inp, el("span", { class: "hint", text: "O servidor só mostra a pista a partir deste momento, seja qual for o relógio do telemóvel do convidado." })]));
+      b.appendChild(err);
+      var ok = el("button", { class: "b b-primary", text: "Agendar" });
+      ok.addEventListener("click", function () {
+        err.textContent = "";
+        if (!inp.value) { err.appendChild(el("p", { class: "alert alert-err", text: "Escolhe a data e a hora." })); return; }
+        busy(ok, true, "A agendar…");
+        rpc("admin_set_clue_status", { p_id: c.id, p_status: "scheduled", p_publish_at_local: inp.value })
+          .then(function () { toast("Agendada para " + inp.value.replace("T", " às ") + ".", "ok"); done(true); return refresh(); }).then(route)
+          .catch(function (e) { busy(ok, false); err.appendChild(el("p", { class: "alert alert-err", text: e.message })); });
+      });
+      b.appendChild(el("div", { class: "row" }, [el("button", { class: "b", text: "Cancelar", onclick: function () { done(false); } }), ok]));
+    });
+  }
+  function editClue(c) {
+    var d = c ? { id: c.id, internal_name: c.internal_name, title: c.title, teaser: c.teaser, content: c.content, image_url: c.image_url, extra_message: c.extra_message, style: c.style }
+              : { internal_name: "", title: "Pista n.º " + (ST.clues.length + 1) + " — ", teaser: "", content: "", image_url: "", extra_message: "", style: "envelope" };
+    openDialog(function (b, done) {
+      b.appendChild(el("h2", { text: c ? "Editar pista" : "Nova pista" }));
+      if (c && c.effective_status === "published") b.appendChild(el("p", { class: "alert alert-warn", text: "Esta pista está publicada: o que guardares aparece logo aos convidados." }));
+      var mk = function (key, label, hint, ta, max) {
+        var id = "cl-" + key, i = el(ta ? "textarea" : "input", { class: ta ? "ta" : "in", id: id, value: d[key] || "", maxlength: max });
+        i.addEventListener("input", function () { d[key] = i.value; });
+        return el("div", { class: "f" }, [el("label", { for: id, text: label }), i, hint ? el("span", { class: "hint", text: hint }) : null]);
+      };
+      b.appendChild(mk("internal_name", "Nome interno", "Só tu vês. Ex.: Pista sobre a vista.", false, 120));
+      b.appendChild(mk("title", "Título público", null, false, 160));
+      b.appendChild(mk("teaser", "Frase de antevisão", "Aparece no objeto fechado.", false, 300));
+      b.appendChild(mk("content", "Pista completa", "O texto revelado ao abrir.", true, 2000));
+      b.appendChild(mk("extra_message", "Mensagem adicional (opcional)", null, true, 500));
+      var st = el("select", { class: "sel", id: "cl-style" }, STYLES.map(function (s) { return el("option", { value: s[0], text: s[1], selected: d.style === s[0] }); }));
+      st.addEventListener("change", function () { d.style = st.value; });
+      b.appendChild(el("div", { class: "f" }, [el("label", { for: "cl-style", text: "Objeto e animação de revelação" }), st]));
+      // imagem
+      var img = el("input", { class: "in", id: "cl-img", value: d.image_url || "", placeholder: "https://…" });
+      img.addEventListener("input", function () { d.image_url = img.value.trim(); });
+      var file = el("input", { type: "file", accept: "image/jpeg,image/png,image/webp", id: "cl-file", class: "sr-only" });
+      var up = el("label", { class: "b b-sm", for: "cl-file", text: "Carregar imagem" });
+      file.addEventListener("change", function () {
+        var f = file.files[0]; if (!f) return;
+        if (f.size > 3 * 1024 * 1024) { toast("A imagem tem de ter menos de 3 MB.", "err"); return; }
+        up.textContent = "A carregar…";
+        var name = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2)) + "." + (f.type.split("/")[1] || "jpg").replace("jpeg", "jpg");
+        sb.storage.from("clue-images").upload(name, f, { contentType: f.type, upsert: false }).then(function (r) {
+          up.textContent = "Carregar imagem";
+          if (r.error) { toast("Não foi possível carregar: " + r.error.message, "err"); return; }
+          d.image_url = sb.storage.from("clue-images").getPublicUrl(name).data.publicUrl; img.value = d.image_url; toast("Imagem carregada.", "ok");
+        });
+      });
+      b.appendChild(el("div", { class: "f" }, [el("label", { for: "cl-img", text: "Imagem (opcional)" }), img, el("div", { class: "actions" }, [up, file, el("button", { class: "b b-sm b-ghost", type: "button", text: "Remover", onclick: function () { d.image_url = ""; img.value = ""; } })]),
+        el("span", { class: "hint", text: "Endereço https. Atenção: imagens carregadas ficam acessíveis a quem souber o link (nome aleatório), mesmo antes da pista ser publicada." })]));
+      var err = el("div", { role: "alert" }); b.appendChild(err);
+      var save = el("button", { class: "b b-primary", text: c ? "Guardar alterações" : "Criar pista (rascunho)" });
+      var doSave = function () {
+        err.textContent = "";
+        if (!d.internal_name.trim() || !d.title.trim()) { err.appendChild(el("p", { class: "alert alert-err", text: "Nome interno e título são obrigatórios." })); return Promise.reject(); }
+        if (d.image_url && !/^https:\/\/[^\s"'<>]+$/.test(d.image_url)) { err.appendChild(el("p", { class: "alert alert-err", text: "A imagem tem de ser um endereço https://" })); return Promise.reject(); }
+        busy(save, true);
+        return rpc("admin_upsert_clue", { p: d }).then(function (r) { d.id = r.id; busy(save, false); return r; })
+          .catch(function (e) { busy(save, false); err.appendChild(el("p", { class: "alert alert-err", text: "Não foi guardada: " + e.message })); throw e; });
+      };
+      save.addEventListener("click", function () { doSave().then(function () { toast(c ? "Pista guardada." : "Pista criada em rascunho.", "ok"); done(true); return refresh(); }).then(route).catch(function () {}); });
+      var prev = el("button", { class: "b", text: "Guardar e pré-visualizar" });
+      prev.addEventListener("click", function () { doSave().then(function (r) { done(true); return refresh().then(route).then(function () { previewPhone("../?preview=1&clue=" + encodeURIComponent(r.id) + "#pistas", "Pista: " + r.title); }); }).catch(function () {}); });
+      b.appendChild(el("div", { class: "row" }, [el("button", { class: "b", text: "Cancelar", onclick: function () { done(false); } }), prev, save]));
+    }, true);
+  }
+
+  /* =================================================================
+     LOCALIZAÇÃO
+     ================================================================= */
+  function pageLocation(v) {
+    var L = ST.location, s = locState(), d = { venue_name: L.venue_name, venue_address: L.venue_address, maps_url: L.maps_url, reveal_message: L.reveal_message };
+    head(v, "Revelação da Localização", "O momento grande. Fica tudo no servidor até autorizares.");
+    var box = el("div", { class: "locstate " + s }, [el("span", { class: "dot", "aria-hidden": "true" }), el("div", null, [
+      el("div", { class: "big", text: locLabel(s) }),
+      el("div", { class: "small", text: s === "hidden" ? "Os convidados não recebem nome, morada nem link." : s === "scheduled" ? "Revela-se sozinha a " + fmt(L.reveal_at) + " (Lisboa)." : "Revelada " + (L.revealed_at || L.reveal_at ? "a " + fmt(L.revealed_at || L.reveal_at) : "") + ". O botão do Google Maps está ativo." })
+    ])]);
+    v.appendChild(box);
+
+    var card = el("section", { class: "card" }, [el("h2", { text: "Dados do local" })]);
+    var urlInput;
+    [["venue_name", "Nome do local"], ["venue_address", "Morada"], ["maps_url", "Link do Google Maps", "No Google Maps: Partilhar → Copiar link. Aceita google.com/maps, maps.google.com e maps.app.goo.gl."], ["reveal_message", "Mensagem da revelação", null, true]].forEach(function (f) {
+      var id = "lc-" + f[0], i = el(f[3] ? "textarea" : "input", { class: f[3] ? "ta" : "in", id: id, value: d[f[0]] || "" });
+      i.addEventListener("input", function () { d[f[0]] = i.value; markDirty(); if (f[0] === "maps_url") checkUrl(); });
+      if (f[0] === "maps_url") urlInput = i;
+      card.appendChild(el("div", { class: "f" }, [el("label", { for: id, text: f[1] }), i, f[2] ? el("span", { class: "hint", id: id + "-hint", text: f[2] }) : null]));
+    });
+    var urlMsg = el("p", { class: "small", style: "margin:-8px 0 14px" });
+    card.appendChild(urlMsg);
+    function checkUrl() {
+      var u = (d.maps_url || "").trim();
+      urlInput.classList.toggle("invalid", !!u && !validMaps(u));
+      urlMsg.textContent = !u ? "" : validMaps(u) ? "✓ Link válido do Google Maps." : "✗ Isto não parece um link https do Google Maps.";
+      urlMsg.style.color = validMaps(u) ? "var(--olive)" : "var(--red)";
+      testLink.hidden = !validMaps(u); if (validMaps(u)) testLink.href = u;
+    }
+    var testLink = el("a", { class: "b b-sm", target: "_blank", rel: "noopener noreferrer", text: "Testar o link", hidden: true });
+    var save = el("button", { class: "b b-primary", text: "Guardar dados do local" });
+    var err = el("div", { role: "alert" });
+    card.appendChild(err);
+    card.appendChild(el("div", { class: "actions" }, [save, testLink]));
+    v.appendChild(card);
+    checkUrl();
+    function saveLoc() {
+      err.textContent = "";
+      d.maps_url = (d.maps_url || "").trim();
+      if (d.maps_url && !validMaps(d.maps_url)) { err.appendChild(el("p", { class: "alert alert-err", text: "O link tem de ser um endereço https do Google Maps." })); return Promise.reject(new Error("url")); }
+      busy(save, true);
+      return rpc("admin_save_location", { p: d }).then(function () { dirty = false; return refresh(); })
+        .catch(function (e) { err.appendChild(el("p", { class: "alert alert-err", text: "Não foi guardado: " + e.message })); throw e; })
+        .finally(function () { busy(save, false); });
+    }
+    save.addEventListener("click", function () { saveLoc().then(function () { toast("Dados do local guardados." + (s === "revealed" ? " Já estão visíveis para os convidados." : " Continuam escondidos."), "ok"); route(); }).catch(function () {}); });
+
+    var act = el("section", { class: "card" }, [el("h2", { text: "Revelar" })]);
+    var ready = validMaps((L.maps_url || "").trim()) && L.venue_name && L.venue_name !== "Local a revelar";
+    if (!ready) act.appendChild(el("p", { class: "alert alert-info", text: "Para revelar, guarda primeiro o nome verdadeiro do local e um link válido do Google Maps." }));
+    var row = el("div", { class: "actions" });
+    row.appendChild(el("button", { class: "b", type: "button", text: "Pré-visualizar a revelação", disabled: !ready, onclick: function () { previewPhone("../?preview=1#local", "Revelação (pré-visualização)"); } }));
+    if (s !== "revealed") row.appendChild(el("button", { class: "b b-terra", type: "button", text: "Revelar agora", disabled: !ready, onclick: function () { reveal(); } }));
+    row.appendChild(el("button", { class: "b", type: "button", text: s === "scheduled" ? "Reagendar" : "Agendar revelação", disabled: !ready || s === "revealed", onclick: function () { scheduleReveal(); } }));
+    if (s === "scheduled") row.appendChild(el("button", { class: "b", type: "button", text: "Cancelar agendamento", onclick: function () { hideAgain("Cancelar o agendamento?", "A localização fica escondida e sem data marcada."); } }));
+    if (s === "revealed") row.appendChild(el("button", { class: "b b-danger", type: "button", text: "Esconder outra vez", onclick: function () { hideAgain("Esconder outra vez a localização?", "Quem já a viu, já a sabe — mas o site deixa de a mostrar."); } }));
+    act.appendChild(row);
+    act.appendChild(el("p", { class: "muted small", style: "margin:12px 0 0", text: "Pelo convite original, a revelação estava prevista para 16 de novembro." }));
+    v.appendChild(act);
+
+    function before() { return dirty ? saveLoc() : Promise.resolve(); }
+    function reveal() {
+      before().then(function () {
+        openDialog(function (b, done) {
+          b.appendChild(el("h2", { text: "Queres mesmo revelar a localização a todos os convidados?" }));
+          b.appendChild(el("p", { class: "muted", style: "margin:0", text: "Ao confirmar, o nome «" + ST.location.venue_name + "», a morada e o link do Google Maps ficam visíveis para qualquer pessoa que abra o site. Uma revelação não se desfaz na cabeça de quem a viu." }));
+          var chk = el("input", { type: "checkbox", id: "rv-ok" });
+          var ok = el("button", { class: "b b-terra", text: "Sim, revelar agora", disabled: true });
+          chk.addEventListener("change", function () { ok.disabled = !chk.checked; });
+          b.appendChild(el("label", { class: "switch", for: "rv-ok" }, [chk, "Confirmo que quero revelar a localização."]));
+          ok.addEventListener("click", function () {
+            busy(ok, true, "A revelar…");
+            rpc("admin_set_location_status", { p_status: "revealed" }).then(function () { done(true); toast("Localização revelada. 🎉", "ok"); return refresh(); }).then(route)
+              .catch(function (e) { busy(ok, false); toast(e.message, "err"); });
+          });
+          b.appendChild(el("div", { class: "row" }, [el("button", { class: "b", text: "Cancelar", onclick: function () { done(false); } }), ok]));
+        });
+      }).catch(function () {});
+    }
+    function scheduleReveal() {
+      before().then(function () {
+        openDialog(function (b, done) {
+          var inp = el("input", { class: "in", type: "datetime-local", id: "rv-at", value: ST.location.reveal_at ? toLisbonInput(ST.location.reveal_at) : "2026-11-16T20:00" });
+          var err2 = el("div");
+          b.appendChild(el("h2", { text: "Agendar a revelação" }));
+          b.appendChild(el("div", { class: "f" }, [el("label", { for: "rv-at", text: "Data e hora (Lisboa)" }), inp, el("span", { class: "hint", text: "A partir desta hora, o servidor mostra a localização a toda a gente. Agendar conta como autorização." })]));
+          var chk = el("input", { type: "checkbox", id: "rv-ok2" });
+          var ok = el("button", { class: "b b-terra", text: "Agendar", disabled: true });
+          chk.addEventListener("change", function () { ok.disabled = !chk.checked; });
+          b.appendChild(el("label", { class: "switch", for: "rv-ok2" }, [chk, "Autorizo a revelação a todos os convidados nesta data."]));
+          b.appendChild(err2);
+          ok.addEventListener("click", function () {
+            err2.textContent = ""; busy(ok, true, "A agendar…");
+            rpc("admin_set_location_status", { p_status: "scheduled", p_reveal_at_local: inp.value }).then(function () { done(true); toast("Revelação agendada.", "ok"); return refresh(); }).then(route)
+              .catch(function (e) { busy(ok, false); err2.appendChild(el("p", { class: "alert alert-err", text: e.message })); });
+          });
+          b.appendChild(el("div", { class: "row" }, [el("button", { class: "b", text: "Cancelar", onclick: function () { done(false); } }), ok]));
+        });
+      }).catch(function () {});
+    }
+    function hideAgain(t, txt) {
+      confirmBox(t, txt, "Esconder", true).then(function (ok) {
+        if (ok) rpc("admin_set_location_status", { p_status: "hidden" }).then(function () { toast("Localização escondida."); return refresh(); }).then(route).catch(function (e) { toast(e.message, "err"); });
+      });
+    }
+  }
+
+  /* =================================================================
+     CONTEÚDO DO WEBSITE (editor genérico do documento de textos)
+     ================================================================= */
+  var SEC_LABEL = { intro: "Ecrã de abertura", hero: "Cena 1 — 50 anos, finalmente", signpost: "Placas dos capítulos", checklist: "«Profissional de nada» (lista)", music: "Banda sonora (Jorge Palma)", invite: "Convite oficial",
+    mystery: "Mistério / pistas", reveal: "Revelação da localização", suggest: "Sugestões de convidados", rsvp: "Confirmar presença", rules: "Regras de ouro", ending: "Cena final", countdown: "Contagem decrescente" };
+  var F_LABEL = { kicker: "Pequeno título", title: "Título", subtitle: "Subtítulo", intro: "Introdução", note: "Nota", items: "Itens", label: "Texto", joke: "Piada", songs: "Músicas (apenas títulos — sem letras)", artist: "Artista",
+    loading: "Texto de carregamento", line2: "Segunda linha", button: "Botão", skip: "Botão saltar", tagline: "Frase lateral", side_note: "Nota lateral", sun_note: "Easter egg do sol", conto: "«Conto contigo»", concept: "Conceito",
+    tap_note: "Nota ao tocar", egg_five: "Easter egg (5 toques)", scroll_hint: "Dica de deslizar", essentials: "Post-it", tap_hint: "Dica de toque", silent_note: "Nota sobre o som", record_notes: "Notas ao tocar no disco várias vezes",
+    statement: "Frase de destaque", date_note: "Nota da data", time_note: "Nota do horário", location_note: "Nota do local", group_note: "Nota do grupo WhatsApp", calendar_button: "Botão do calendário", lisboa: "Azulejo",
+    comeback: "Convite para voltar", empty: "Sem pistas", locked_label: "Pista bloqueada", random_button: "Botão pista ao acaso", shake_enable: "Botão modo abanar", shake_messages: "Mensagens de abanar/bloqueio", location_locked: "Ao tocar no mapa escondido",
+    maps_button: "Botão do mapa", hidden_button: "Botão escondido", scheduled_text: "Texto de agendamento ({data})", placeholder: "Texto de exemplo", whatsapp_button: "Botão WhatsApp", responses: "Respostas divertidas",
+    cta: "Botão principal", after: "Depois de tocar", lines: "Linhas finais", last: "Última linha", carnation: "Cravo", hidden_note: "Nota escondida", review_button: "Botão rever pistas", rsvp_button: "Botão confirmar",
+    before: "Antes", during: "Durante", after_: "Depois", sections: "Secções" };
+  function pageContent(v) {
+    var doc = ST.documents.content, d = JSON.parse(JSON.stringify(doc.draft));
+    d = merge(DEF.content, d);
+    head(v, "Conteúdo do Website", "Todos os textos das cenas. Guardar cria rascunho; publicar põe no ar.");
+    if (doc.has_unpublished) v.appendChild(el("p", { class: "alert alert-warn", text: "Há textos guardados por publicar." }));
+    var tog = el("section", { class: "card" }, [el("h2", { text: "Secções opcionais" })]);
+    [["signpost", "Placas dos capítulos"], ["checklist", "Lista «Profissional de nada»"], ["music", "Banda sonora"], ["suggest", "Sugestões de convidados"], ["rules", "Regras de ouro"]].forEach(function (s) {
+      var c = el("input", { type: "checkbox", checked: d.sections[s[0]] !== false });
+      c.addEventListener("change", function () { d.sections[s[0]] = c.checked; markDirty(); });
+      tog.appendChild(el("label", { class: "switch" }, [c, s[1]]));
+    });
+    v.appendChild(tog);
+    var holder = el("div", { style: "margin-top:16px" });
+    Object.keys(d).forEach(function (k) {
+      if (k === "sections") return;
+      var det = el("details", { class: "sec" }, [el("summary", { text: SEC_LABEL[k] || k })]);
+      var body = el("div", { class: "body" });
+      renderObj(body, d[k], [k]);
+      det.appendChild(body); holder.appendChild(det);
+    });
+    v.appendChild(holder);
+    var err = el("div", { role: "alert" });
+    var save = el("button", { class: "b b-primary", text: "Guardar alterações" });
+    v.appendChild(el("div", { class: "card", style: "margin-top:16px" }, [err, el("p", { class: "muted small", text: "Dica: o texto é sempre mostrado como texto simples (sem HTML). Para a música, usa só títulos: não coloques letras de canções." }),
+      el("div", { class: "actions" }, [save, el("button", { class: "b", text: "Pré-visualizar", onclick: function () { doSave().then(function () { previewPhone("../?preview=1"); }); } })])]));
+    function doSave() {
+      err.textContent = ""; busy(save, true);
+      return rpc("admin_save_document", { p_key: "content", p_draft: d }).then(function () { dirty = false; toast("Textos guardados como rascunho.", "ok"); return refresh(); })
+        .catch(function (e) { err.appendChild(el("p", { class: "alert alert-err", text: "Não foi guardado: " + e.message })); throw e; })
+        .finally(function () { busy(save, false); });
+    }
+    save.addEventListener("click", function () { doSave().then(route).catch(function () {}); });
+
+    function renderObj(box, obj, path) {
+      box.textContent = "";
+      Object.keys(obj).forEach(function (key) {
+        var val = obj[key], label = F_LABEL[key === "after" && path[0] === "countdown" ? "after_" : key] || key, id = "c-" + path.concat(key).join("-");
+        if (typeof val === "string") {
+          var long = val.length > 70 || /note|message|subtitle|intro|comeback|essentials|statement|concept/.test(key);
+          var i = el(long ? "textarea" : "input", { class: long ? "ta" : "in", id: id, value: val });
+          i.addEventListener("input", function () { obj[key] = i.value; markDirty(); });
+          box.appendChild(el("div", { class: "f" }, [el("label", { for: id, text: label }), i]));
+        } else if (Array.isArray(val)) {
+          var wrap = el("div", { class: "f" }, [el("span", { class: "lab", text: label })]);
+          var lst = el("div", { class: "lst" }); wrap.appendChild(lst);
+          var draw = function () {
+            lst.textContent = "";
+            val.forEach(function (item, idx) {
+              var fields = el("div", { class: "fields" });
+              if (typeof item === "string") {
+                var ii = el("input", { class: "in", value: item, "aria-label": label + " " + (idx + 1) });
+                ii.addEventListener("input", function () { val[idx] = ii.value; markDirty(); });
+                fields.appendChild(ii);
+              } else {
+                Object.keys(item).forEach(function (sk) {
+                  var long2 = sk === "note" || sk === "joke" || (item[sk] || "").length > 60, sid = id + "-" + idx + "-" + sk;
+                  var si = el(long2 ? "textarea" : "input", { class: long2 ? "ta" : "in", id: sid, value: item[sk] });
+                  if (long2) si.style.minHeight = "60px";
+                  si.addEventListener("input", function () { item[sk] = si.value; markDirty(); });
+                  fields.appendChild(el("div", { class: "f", style: "margin:0" }, [el("label", { for: sid, class: "small", text: F_LABEL[sk] || sk }), si]));
+                });
+              }
+              var ctl = el("div", { class: "ctl" }, [
+                el("button", { class: "b b-sm b-icon b-ghost", type: "button", "aria-label": "Subir", text: "↑", disabled: idx === 0, onclick: function () { val.splice(idx - 1, 0, val.splice(idx, 1)[0]); markDirty(); draw(); } }),
+                el("button", { class: "b b-sm b-icon b-ghost", type: "button", "aria-label": "Descer", text: "↓", disabled: idx === val.length - 1, onclick: function () { val.splice(idx + 1, 0, val.splice(idx, 1)[0]); markDirty(); draw(); } }),
+                el("button", { class: "b b-sm b-icon b-ghost", type: "button", "aria-label": "Remover", text: "✕", onclick: function () { val.splice(idx, 1); markDirty(); draw(); } })
+              ]);
+              lst.appendChild(el("div", { class: "it" }, [fields, ctl]));
+            });
+          };
+          draw();
+          wrap.appendChild(el("button", { class: "b b-sm", type: "button", text: "+ Adicionar", onclick: function () {
+            var tpl = val.length && typeof val[0] === "object" ? Object.keys(val[0]).reduce(function (o, k2) { o[k2] = ""; return o; }, {}) : (val.length || !DEF_ARR(path.concat(key)) || typeof DEF_ARR(path.concat(key))[0] === "string" ? "" : Object.keys(DEF_ARR(path.concat(key))[0]).reduce(function (o, k2) { o[k2] = ""; return o; }, {}));
+            val.push(tpl); markDirty(); draw();
+          } }));
+          box.appendChild(wrap);
+        } else if (val && typeof val === "object") {
+          var fs = el("fieldset", { style: "border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0 0 14px" }, [el("legend", { class: "small", text: label })]);
+          renderObj(fs, val, path.concat(key)); box.appendChild(fs);
+        }
+      });
+    }
+  }
+  function DEF_ARR(path) { return path.reduce(function (o, k) { return o == null ? undefined : o[k]; }, DEF.content); }
+  function merge(base, over) {
+    if (Array.isArray(over)) return over;
+    if (!over || typeof over !== "object") return over === undefined ? JSON.parse(JSON.stringify(base)) : over;
+    var o = {}, k;
+    for (k in base) o[k] = (k in over) ? (base[k] && typeof base[k] === "object" && !Array.isArray(base[k]) ? merge(base[k], over[k]) : over[k]) : JSON.parse(JSON.stringify(base[k]));
+    for (k in over) if (!(k in o)) o[k] = over[k];
+    return o;
+  }
+
+  /* =================================================================
+     SUGESTÕES
+     ================================================================= */
+  var SUG_PT = { new: "Nova", reviewed: "Revista", accepted: "Aceite", declined: "Recusada" };
+  function pageSuggestions(v) {
+    head(v, "Sugestões de Convidados", "Privado. Nenhum nome nem decisão aparece no site público.",
+      el("button", { class: "b", text: "Exportar CSV", onclick: exportSug }));
+    var box = el("div", null, [el("p", { class: "muted", text: "A carregar…" })]); v.appendChild(box);
+    var filt = "all";
+    rpc("admin_list_suggestions").then(function (rows) {
+      window.__sug = rows;
+      var draw = function () {
+        box.textContent = "";
+        var bar = el("div", { class: "actions", style: "margin-bottom:12px" });
+        [["all", "Todas"], ["new", "Novas"], ["reviewed", "Revistas"], ["accepted", "Aceites"], ["declined", "Recusadas"]].forEach(function (f) {
+          var n = f[0] === "all" ? rows.length : rows.filter(function (r) { return r.status === f[0]; }).length;
+          bar.appendChild(el("button", { class: "b b-sm" + (filt === f[0] ? " b-primary" : ""), text: f[1] + " (" + n + ")", onclick: function () { filt = f[0]; draw(); } }));
+        });
+        box.appendChild(bar);
+        var list = rows.filter(function (r) { return filt === "all" || r.status === filt; });
+        if (!list.length) box.appendChild(el("div", { class: "card" }, [el("p", { style: "margin:0", class: "muted", text: rows.length ? "Nada neste filtro." : "Ainda não chegaram sugestões." })]));
+        list.forEach(function (r) {
+          var sel = el("select", { class: "sel", "aria-label": "Estado" }, Object.keys(SUG_PT).map(function (k) { return el("option", { value: k, text: SUG_PT[k], selected: r.status === k }); }));
+          var note = el("textarea", { class: "ta", "aria-label": "Nota privada", placeholder: "Nota privada (só tu vês)", value: r.admin_note || "", maxlength: 1000 });
+          note.style.minHeight = "60px";
+          var save = el("button", { class: "b b-sm b-primary", text: "Guardar" });
+          save.addEventListener("click", function () {
+            busy(save, true);
+            rpc("admin_update_suggestion", { p_id: r.id, p_status: sel.value, p_note: note.value }).then(function (n) { r.status = n.status; r.admin_note = n.admin_note; toast("Sugestão atualizada.", "ok"); refresh(); draw(); })
+              .catch(function (e) { toast(e.message, "err"); busy(save, false); });
+          });
+          var del = el("button", { class: "b b-sm b-danger", text: "Apagar", onclick: function () {
+            confirmBox("Apagar a sugestão «" + r.suggested_name + "»?", "Não se pode desfazer.", "Apagar", true).then(function (ok) {
+              if (ok) rpc("admin_delete_suggestion", { p_id: r.id }).then(function () { rows.splice(rows.indexOf(r), 1); toast("Apagada."); refresh(); draw(); }).catch(function (e) { toast(e.message, "err"); });
+            });
+          } });
+          box.appendChild(el("article", { class: "sug" }, [
+            el("div", { style: "display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap" }, [el("span", { class: "nm", text: r.suggested_name }), el("span", { class: "chip " + ({ new: "c-warn", reviewed: "c-scheduled", accepted: "c-published", declined: "c-archived" })[r.status], text: SUG_PT[r.status] })]),
+            el("div", { class: "small muted", text: (r.suggested_by ? "Sugerido por " + r.suggested_by + " · " : "Anónimo · ") + fmt(r.created_at) }),
+            r.reason ? el("p", { style: "margin:0", text: r.reason }) : null,
+            el("div", { class: "grid2" }, [el("div", { class: "f", style: "margin:0" }, [sel]), el("div")]),
+            note, el("div", { class: "actions" }, [save, del])
+          ]));
+        });
+      };
+      draw();
+    }).catch(function (e) { box.textContent = ""; box.appendChild(el("p", { class: "alert alert-err", text: e.message })); });
+  }
+  function csvCell(v) { var s = String(v == null ? "" : v); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return '"' + s.replace(/"/g, '""') + '"'; }
+  function exportSug() {
+    rpc("admin_list_suggestions").then(function (rows) {
+      var lines = [["Nome sugerido", "Sugerido por", "Motivo", "Estado", "Nota privada", "Data"].map(csvCell).join(";")];
+      rows.forEach(function (r) { lines.push([r.suggested_name, r.suggested_by, r.reason, SUG_PT[r.status], r.admin_note, fmt(r.created_at)].map(csvCell).join(";")); });
+      download("sugestoes-festa50.csv", "﻿" + lines.join("\r\n"), "text/csv;charset=utf-8");
+    }).catch(function (e) { toast(e.message, "err"); });
+  }
+
+  /* =================================================================
+     DEFINIÇÕES
+     ================================================================= */
+  var AUD_PT = { rascunho_guardado: "Rascunho guardado", publicado: "Publicado", rascunho_descartado: "Rascunho descartado", pista_criada: "Pista criada", pista_editada: "Pista editada", pista_publicada: "Pista publicada",
+    pista_agendada: "Pista agendada", pista_arquivada: "Pista arquivada", pista_despublicada: "Pista despublicada", pista_duplicada: "Pista duplicada", pista_apagada: "Pista apagada", pistas_reordenadas: "Pistas reordenadas",
+    localizacao_editada: "Local editado", localizacao_revelada: "LOCALIZAÇÃO REVELADA", localizacao_agendada: "Revelação agendada", localizacao_escondida: "Localização escondida", sugestao_atualizada: "Sugestão atualizada", sugestao_apagada: "Sugestão apagada" };
+  function pageSettings(v) {
+    head(v, "Definições", "Conta, segurança, cópias de segurança e registo de alterações.");
+    // password
+    var pc = el("section", { class: "card" }, [el("h2", { text: "Mudar a password" })]);
+    var cur = el("input", { class: "in", type: "password", id: "pw-cur", autocomplete: "current-password" }), n1 = el("input", { class: "in", type: "password", id: "pw-1", autocomplete: "new-password" }), n2 = el("input", { class: "in", type: "password", id: "pw-2", autocomplete: "new-password" });
+    var perr = el("div", { role: "alert" }), pbtn = el("button", { class: "b b-primary", text: "Mudar password" });
+    pc.appendChild(el("div", { class: "f" }, [el("label", { for: "pw-cur", text: "Password atual" }), cur]));
+    pc.appendChild(el("div", { class: "grid2" }, [el("div", { class: "f" }, [el("label", { for: "pw-1", text: "Nova password" }), n1, el("span", { class: "hint", text: "Mínimo 10 caracteres. Uma frase curta funciona bem." })]), el("div", { class: "f" }, [el("label", { for: "pw-2", text: "Repetir nova password" }), n2])]));
+    pc.appendChild(perr); pc.appendChild(pbtn);
+    pbtn.addEventListener("click", function () {
+      perr.textContent = "";
+      var bad = function (m) { perr.appendChild(el("p", { class: "alert alert-err", text: m })); };
+      if (n1.value.length < 10) return bad("A nova password tem de ter pelo menos 10 caracteres.");
+      if (n1.value !== n2.value) return bad("As novas passwords não coincidem.");
+      if (n1.value === cur.value) return bad("A nova password tem de ser diferente da atual.");
+      busy(pbtn, true, "A mudar…");
+      sb.auth.getUser().then(function (u) {
+        var email = u.data.user && u.data.user.email;
+        // confirma a password atual antes de mudar
+        return sb.auth.signInWithPassword({ email: email, password: cur.value }).then(function (r) {
+          if (r.error) throw new Error("A password atual não está correta.");
+          return sb.auth.updateUser({ password: n1.value });
+        });
+      }).then(function (r) {
+        if (r.error) throw new Error(r.error.message);
+        cur.value = n1.value = n2.value = ""; toast("Password alterada.", "ok");
+      }).catch(function (e) { bad(e.message); }).finally(function () { busy(pbtn, false); });
+    });
+    v.appendChild(pc);
+
+    var bk = el("section", { class: "card" }, [el("h2", { text: "Cópia de segurança" }),
+      el("p", { class: "muted", style: "margin-top:0", text: "Descarrega tudo (evento, textos, pistas, localização, sugestões e registo) num ficheiro JSON. Guarda-o num sítio privado: inclui a localização." }),
+      el("div", { class: "actions" }, [el("button", { class: "b", text: "Descarregar cópia (JSON)", onclick: function () {
+        Promise.all([rpc("admin_get_state"), suggestionsEnabled() ? rpc("admin_list_suggestions") : Promise.resolve([]), rpc("admin_audit", { p_limit: 500 })]).then(function (r) {
+          download("festa50-copia-" + new Date().toISOString().slice(0, 10) + ".json", JSON.stringify({ exportado_em: new Date().toISOString(), estado: r[0], sugestoes: r[1], registo: r[2] }, null, 2), "application/json");
+        }).catch(function (e) { toast(e.message, "err"); });
+      } }), suggestionsEnabled() ? el("button", { class: "b", text: "Exportar sugestões (CSV)", onclick: exportSug }) : null])]);
+    v.appendChild(bk);
+
+    v.appendChild(el("section", { class: "card" }, [el("h2", { text: "Confirmações de presença" }),
+      el("p", { class: "muted", style: "margin:0", text: "As confirmações são feitas por WhatsApp: o botão do site abre uma conversa contigo com a mensagem pronta, e só conta quando o convidado a envia. O site não regista nem conta confirmações — a lista verdadeira está no teu WhatsApp." })]));
+
+    var au = el("section", { class: "card" }, [el("h2", { text: "Registo de alterações" }), el("p", { class: "muted", text: "A carregar…" })]);
+    v.appendChild(au);
+    rpc("admin_audit", { p_limit: 60 }).then(function (rows) {
+      au.lastChild.remove();
+      if (!rows.length) { au.appendChild(el("p", { class: "muted", text: "Ainda sem registos." })); return; }
+      var t = el("table", { class: "audit" });
+      rows.forEach(function (r) {
+        var det = r.details && (r.details.nome || r.details.local || r.details.estado || "");
+        t.appendChild(el("tr", null, [el("td", { style: "white-space:nowrap;color:var(--ink-2)", text: fmt(r.at) }), el("td", null, [el("strong", { text: AUD_PT[r.action] || r.action }), det ? el("span", { class: "muted", text: " · " + det }) : null, el("div", { class: "small muted", text: r.actor_email || "" })])]));
+      });
+      au.appendChild(el("div", { style: "overflow-x:auto" }, [t]));
+    }).catch(function (e) { au.lastChild.textContent = e.message; });
+
+    v.appendChild(el("section", { class: "card" }, [el("h2", { text: "Sessão" }), el("p", { class: "muted", style: "margin-top:0", text: "Ligado como " + ($("#who").textContent || "—") + "." }), el("button", { class: "b", text: "Terminar sessão", onclick: logout })]));
+  }
+})();
+</script>
+</body>
+</html>

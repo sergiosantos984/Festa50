@@ -1,0 +1,6 @@
+Fontes incluídas (ficheiros .woff2, subconjunto latino, via Fontsource):
+- Bricolage Grotesque — SIL Open Font License 1.1
+- Caveat — SIL Open Font License 1.1
+- DM Sans — SIL Open Font License 1.1
+- Permanent Marker — Apache License 2.0
+Todas permitem utilização e alojamento em sites, incluindo uso comercial.
